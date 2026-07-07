@@ -1,9 +1,11 @@
 import { useEffect, useRef } from 'react';
 import './ChessArenaBackground.css';
 
-function ChessArenaBackground() {
+function ChessArenaBackground({ turn, inCheck }) {
   const canvasRef = useRef(null);
   const animationRef = useRef(null);
+  const mouseRef = useRef({ x: 0.5, y: 0.5 });
+  const currentMouseRef = useRef({ x: 0.5, y: 0.5 });
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -17,21 +19,32 @@ function ChessArenaBackground() {
       canvas.height = window.innerHeight;
     };
 
-    const drawChessPiece = (x, y, size, type, opacity) => {
+    const handleMouseMove = (e) => {
+      mouseRef.current.x = e.clientX / window.innerWidth;
+      mouseRef.current.y = e.clientY / window.innerHeight;
+    };
+
+    const drawChessPiece = (x, y, size, type, opacity, parallaxOffsetX, parallaxOffsetY) => {
       ctx.save();
       ctx.globalAlpha = opacity;
       ctx.font = `${size}px serif`;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
 
-      // Create gradient for piece
+      // Create gradient for piece - color based on turn
       const gradient = ctx.createLinearGradient(x, y - size / 2, x, y + size / 2);
-      gradient.addColorStop(0, 'rgba(243, 156, 18, 0.15)');
-      gradient.addColorStop(0.5, 'rgba(243, 156, 18, 0.08)');
-      gradient.addColorStop(1, 'rgba(243, 156, 18, 0.03)');
+      if (turn === 'w') {
+        gradient.addColorStop(0, 'rgba(243, 156, 18, 0.15)');
+        gradient.addColorStop(0.5, 'rgba(243, 156, 18, 0.08)');
+        gradient.addColorStop(1, 'rgba(243, 156, 18, 0.03)');
+      } else {
+        gradient.addColorStop(0, 'rgba(107, 159, 216, 0.15)');
+        gradient.addColorStop(0.5, 'rgba(107, 159, 216, 0.08)');
+        gradient.addColorStop(1, 'rgba(107, 159, 216, 0.03)');
+      }
 
       ctx.fillStyle = gradient;
-      ctx.fillText(type, x, y);
+      ctx.fillText(type, x + parallaxOffsetX, y + parallaxOffsetY);
       ctx.restore();
     };
 
@@ -93,9 +106,20 @@ function ChessArenaBackground() {
         centerX, centerY, canvas.width * 0.5
       );
 
-      gradient.addColorStop(0, 'rgba(243, 156, 18, 0.08)');
-      gradient.addColorStop(0.3, 'rgba(243, 156, 18, 0.04)');
-      gradient.addColorStop(0.6, 'rgba(52, 152, 219, 0.02)');
+      // Dynamic spotlight based on turn and check
+      if (inCheck) {
+        gradient.addColorStop(0, 'rgba(220, 38, 38, 0.12)');
+        gradient.addColorStop(0.3, 'rgba(220, 38, 38, 0.06)');
+        gradient.addColorStop(0.6, 'rgba(220, 38, 38, 0.02)');
+      } else if (turn === 'w') {
+        gradient.addColorStop(0, 'rgba(243, 156, 18, 0.10)');
+        gradient.addColorStop(0.3, 'rgba(243, 156, 18, 0.05)');
+        gradient.addColorStop(0.6, 'rgba(232, 139, 62, 0.02)');
+      } else {
+        gradient.addColorStop(0, 'rgba(107, 159, 216, 0.10)');
+        gradient.addColorStop(0.3, 'rgba(107, 159, 216, 0.05)');
+        gradient.addColorStop(0.6, 'rgba(52, 152, 219, 0.02)');
+      }
       gradient.addColorStop(1, 'transparent');
 
       ctx.fillStyle = gradient;
@@ -106,25 +130,38 @@ function ChessArenaBackground() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       animationTime += 0.01;
 
+      // Smooth mouse parallax
+      const ease = 0.08;
+      currentMouseRef.current.x += (mouseRef.current.x - currentMouseRef.current.x) * ease;
+      currentMouseRef.current.y += (mouseRef.current.y - currentMouseRef.current.y) * ease;
+
+      const offsetX = (currentMouseRef.current.x - 0.5);
+      const offsetY = (currentMouseRef.current.y - 0.5);
+
       // Draw spotlight effect
       drawSpotlight();
 
       // Draw perspective grid
       drawPerspectiveGrid(animationTime);
 
-      // Draw floating chess piece silhouettes
+      // Draw floating chess piece silhouettes with parallax
       const pieces = [
-        { char: '♔', x: 0.15, y: 0.25, size: 300, speed: 0.3, phase: 0 },
-        { char: '♕', x: 0.85, y: 0.35, size: 280, speed: 0.25, phase: Math.PI },
-        { char: '♘', x: 0.25, y: 0.65, size: 250, speed: 0.35, phase: Math.PI * 0.5 },
-        { char: '♖', x: 0.75, y: 0.7, size: 220, speed: 0.28, phase: Math.PI * 1.5 },
+        { char: '♔', x: 0.15, y: 0.25, size: 300, speed: 0.3, phase: 0, depth: 0.5 },
+        { char: '♕', x: 0.85, y: 0.35, size: 280, speed: 0.25, phase: Math.PI, depth: 0.5 },
+        { char: '♘', x: 0.25, y: 0.65, size: 250, speed: 0.35, phase: Math.PI * 0.5, depth: 0.35 },
+        { char: '♖', x: 0.75, y: 0.7, size: 220, speed: 0.28, phase: Math.PI * 1.5, depth: 0.35 },
       ];
 
       pieces.forEach(piece => {
         const x = canvas.width * piece.x;
         const y = canvas.height * piece.y + Math.sin(animationTime * piece.speed + piece.phase) * 20;
         const opacity = 0.03 + Math.sin(animationTime * 0.5 + piece.phase) * 0.02;
-        drawChessPiece(x, y, piece.size, piece.char, opacity);
+
+        // Parallax effect - deeper pieces move more
+        const parallaxX = offsetX * piece.depth * 80;
+        const parallaxY = offsetY * piece.depth * 80;
+
+        drawChessPiece(x, y, piece.size, piece.char, opacity, parallaxX, parallaxY);
       });
 
       animationRef.current = requestAnimationFrame(animate);
@@ -132,15 +169,17 @@ function ChessArenaBackground() {
 
     resize();
     window.addEventListener('resize', resize);
+    window.addEventListener('mousemove', handleMouseMove);
     animate();
 
     return () => {
       window.removeEventListener('resize', resize);
+      window.removeEventListener('mousemove', handleMouseMove);
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
       }
     };
-  }, []);
+  }, [turn, inCheck]);
 
   return (
     <>

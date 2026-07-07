@@ -4,44 +4,50 @@
   inset: 0;
   pointer-events: none;
   z-index: 1;
-  transition: opacity 0.8s ease-in-out;
+  transition: opacity 1s ease-in-out;
 }
 
 .white-turn-glow {
   background: radial-gradient(
-    ellipse 60% 50% at 20% 50%,
-    rgba(243, 156, 18, 0.18) 0%,
-    rgba(232, 139, 62, 0.12) 30%,
-    transparent 60%
+    ellipse 70% 60% at 15% 50%,
+    rgba(243, 156, 18, 0.28) 0%,
+    rgba(232, 139, 62, 0.18) 25%,
+    rgba(243, 156, 18, 0.08) 45%,
+    transparent 70%
   );
-  animation: ambientPulseWhite 3s ease-in-out infinite;
+  animation: ambientPulseWhite 4s ease-in-out infinite;
 }
 
 .black-turn-glow {
   background: radial-gradient(
-    ellipse 60% 50% at 80% 50%,
-    rgba(107, 159, 216, 0.16) 0%,
-    rgba(78, 125, 178, 0.10) 30%,
-    transparent 60%
+    ellipse 70% 60% at 85% 50%,
+    rgba(107, 159, 216, 0.26) 0%,
+    rgba(78, 125, 178, 0.16) 25%,
+    rgba(107, 159, 216, 0.08) 45%,
+    transparent 70%
   );
-  animation: ambientPulseBlack 3s ease-in-out infinite;
+  animation: ambientPulseBlack 4s ease-in-out infinite;
 }
 
 @keyframes ambientPulseWhite {
   0%, 100% {
-    opacity: 0.7;
+    opacity: 0.8;
+    transform: scale(1) translateX(0);
   }
   50% {
     opacity: 1;
+    transform: scale(1.05) translateX(10px);
   }
 }
 
 @keyframes ambientPulseBlack {
   0%, 100% {
-    opacity: 0.7;
+    opacity: 0.8;
+    transform: scale(1) translateX(0);
   }
   50% {
     opacity: 1;
+    transform: scale(1.05) translateX(-10px);
   }
 }
 
@@ -108,19 +114,21 @@
 /* Dark mode adjustments */
 .dark .white-turn-glow {
   background: radial-gradient(
-    ellipse 60% 50% at 20% 50%,
-    rgba(243, 156, 18, 0.22) 0%,
-    rgba(232, 139, 62, 0.15) 30%,
-    transparent 60%
+    ellipse 70% 60% at 15% 50%,
+    rgba(243, 156, 18, 0.35) 0%,
+    rgba(232, 139, 62, 0.22) 25%,
+    rgba(243, 156, 18, 0.10) 45%,
+    transparent 70%
   );
 }
 
 .dark .black-turn-glow {
   background: radial-gradient(
-    ellipse 60% 50% at 80% 50%,
-    rgba(107, 159, 216, 0.20) 0%,
-    rgba(78, 125, 178, 0.13) 30%,
-    transparent 60%
+    ellipse 70% 60% at 85% 50%,
+    rgba(107, 159, 216, 0.32) 0%,
+    rgba(78, 125, 178, 0.20) 25%,
+    rgba(107, 159, 216, 0.10) 45%,
+    transparent 70%
   );
 }
 

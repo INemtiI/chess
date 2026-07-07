@@ -28,7 +28,7 @@ function AnimatedBackground({ turn, inCheck, lastMove, capturedPieces }) {
 
   return (
     <>
-      <ChessArenaBackground />
+      <ChessArenaBackground turn={turn} inCheck={inCheck} />
       <div className="animated-bg">
         <div className="spotlight-vignette"></div>
         <div className="luxury-glow"></div>
