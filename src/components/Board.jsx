@@ -30,36 +30,63 @@ function Board({ position, onSquareClick, selectedSquare, legalMoves, lastMove, 
   return (
     <div className="board-container">
       <div className="board-wrapper">
-        <div className="board">
-          {displayRanks.map((rank, rankIndex) => (
-            displayFiles.map((file, fileIndex) => {
-              const square = file + rank;
-              const piece = game.get(square);
-              const isLight = (rankIndex + fileIndex) % 2 === 0;
-              const isSelected = selectedSquare === square;
-              const isLegalMove = legalMoves.includes(square);
-              const isLastMove = lastMove && (lastMove.from === square || lastMove.to === square);
-              const isKingInCheck = kingSquare === square;
+        <div className="board-frame">
+          {/* Top file labels */}
+          <div className="board-labels board-labels-top">
+            {displayFiles.map(file => (
+              <div key={file} className="board-label">{file}</div>
+            ))}
+          </div>
 
-              return (
-                <Square
-                  key={square}
-                  square={square}
-                  piece={piece}
-                  isLight={isLight}
-                  isSelected={isSelected}
-                  isLegalMove={isLegalMove}
-                  isLastMove={isLastMove}
-                  isKingInCheck={isKingInCheck}
-                  onClick={() => onSquareClick(square)}
-                  showFile={rank === (flipped ? '8' : '1')}
-                  showRank={file === (flipped ? 'h' : 'a')}
-                  file={file}
-                  rank={rank}
-                />
-              );
-            })
-          ))}
+          {/* Left rank labels */}
+          <div className="board-labels board-labels-left">
+            {displayRanks.map(rank => (
+              <div key={rank} className="board-label">{rank}</div>
+            ))}
+          </div>
+
+          {/* Chess board */}
+          <div className="board">
+            {displayRanks.map((rank, rankIndex) => (
+              displayFiles.map((file, fileIndex) => {
+                const square = file + rank;
+                const piece = game.get(square);
+                const isLight = (rankIndex + fileIndex) % 2 === 0;
+                const isSelected = selectedSquare === square;
+                const isLegalMove = legalMoves.includes(square);
+                const isLastMove = lastMove && (lastMove.from === square || lastMove.to === square);
+                const isKingInCheck = kingSquare === square;
+
+                return (
+                  <Square
+                    key={square}
+                    square={square}
+                    piece={piece}
+                    isLight={isLight}
+                    isSelected={isSelected}
+                    isLegalMove={isLegalMove}
+                    isLastMove={isLastMove}
+                    isKingInCheck={isKingInCheck}
+                    onClick={() => onSquareClick(square)}
+                  />
+                );
+              })
+            ))}
+          </div>
+
+          {/* Right rank labels */}
+          <div className="board-labels board-labels-right">
+            {displayRanks.map(rank => (
+              <div key={rank} className="board-label">{rank}</div>
+            ))}
+          </div>
+
+          {/* Bottom file labels */}
+          <div className="board-labels board-labels-bottom">
+            {displayFiles.map(file => (
+              <div key={file} className="board-label">{file}</div>
+            ))}
+          </div>
         </div>
       </div>
     </div>

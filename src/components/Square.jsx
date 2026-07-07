@@ -9,11 +9,7 @@ function Square({
   isLegalMove,
   isLastMove,
   isKingInCheck,
-  onClick,
-  showFile,
-  showRank,
-  file,
-  rank
+  onClick
 }) {
   return (
     <div
@@ -24,8 +20,6 @@ function Square({
       {isLegalMove && (
         <div className={`legal-move-indicator ${piece ? 'capture' : 'empty'}`}></div>
       )}
-      {showFile && <div className="coord coord-file">{file}</div>}
-      {showRank && <div className="coord coord-rank">{rank}</div>}
     </div>
   );
 }

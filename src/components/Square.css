@@ -100,22 +100,15 @@
 }
 
 .coord {
-  position: absolute;
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  color: var(--muted-foreground);
-  pointer-events: none;
-  user-select: none;
+  /* Removed - coordinates now outside board */
 }
 
 .coord-file {
-  bottom: 2px;
-  right: 4px;
+  /* Removed - coordinates now outside board */
 }
 
 .coord-rank {
-  top: 2px;
-  left: 4px;
+  /* Removed - coordinates now outside board */
 }
 
 .piece {
