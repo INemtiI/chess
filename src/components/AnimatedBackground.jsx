@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import ParticleBackground from './ParticleBackground';
 import ChessArenaBackground from './ChessArenaBackground';
+import ParallaxBackground from './ParallaxBackground';
 import './AnimatedBackground.css';
 
 function AnimatedBackground({ turn, inCheck, lastMove, capturedPieces }) {
@@ -28,6 +29,7 @@ function AnimatedBackground({ turn, inCheck, lastMove, capturedPieces }) {
 
   return (
     <>
+      <ParallaxBackground />
       <ChessArenaBackground turn={turn} inCheck={inCheck} />
       <div className="animated-bg">
         <div className="spotlight-vignette"></div>
