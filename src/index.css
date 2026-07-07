@@ -3,45 +3,56 @@
 @tailwind utilities;
 
 :root {
+  /* Midnight Chess Arena Color Scheme */
+  --bg-deep-indigo: #1a1a2e;
+  --bg-graphite: #16213e;
+  --light-square: #d4a574;
+  --dark-square: #2d4a5a;
+  --accent-amber: #f39c12;
+  --accent-electric-blue: #3498db;
+  --danger-red: #e74c3c;
+  --victory-gold: #f1c40f;
+  --victory-emerald: #2ecc71;
+
   --card: oklch(99.5% 0 0);
-  --ring: oklch(0.637 0.237 25.331);
+  --ring: var(--accent-amber);
   --input: oklch(0.929 0.013 255.508);
   --muted: oklch(0.968 0.007 247.896);
-  --accent: oklch(0.637 0.237 25.331);
+  --accent: var(--accent-amber);
   --border: oklch(0.929 0.013 255.508);
-  --radius: 0.5rem;
-  --chart-1: oklch(0.637 0.237 25.331);
+  --radius: 0.75rem;
+  --chart-1: var(--accent-amber);
   --chart-2: oklch(0.70 0.20 60);
   --chart-3: oklch(0.62 0.18 200);
   --chart-4: oklch(0.58 0.22 140);
   --chart-5: oklch(0.65 0.15 280);
   --popover: oklch(99.5% 0 0);
-  --primary: oklch(0.637 0.237 25.331);
+  --primary: var(--accent-amber);
   --sidebar: oklch(0.97 0 0);
   --spacing: 0.25rem;
   --font-mono: JetBrains Mono, ui-monospace, monospace;
   --font-sans: Inter, ui-sans-serif, sans-serif, system-ui;
   --secondary: oklch(0.97 0 0);
-  --background: oklch(0.985 0 0);
+  --background: #f5f5f5;
   --font-serif: Noto Serif Georgian, ui-serif, serif;
   --foreground: oklch(0.145 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --shadow-blur: 4px;
-  --shadow-color: oklch(0 0 0);
-  --sidebar-ring: oklch(0.637 0.237 25.331);
+  --destructive: var(--danger-red);
+  --shadow-blur: 20px;
+  --shadow-color: rgba(0, 0, 0, 0.5);
+  --sidebar-ring: var(--accent-amber);
   --shadow-spread: 0px;
   --letter-spacing: 0em;
-  --shadow-opacity: 0.1;
+  --shadow-opacity: 0.3;
   --sidebar-accent: oklch(0.929 0.013 255.508);
   --sidebar-border: oklch(0.929 0.013 255.508);
   --card-foreground: oklch(0.145 0 0);
   --shadow-offset-x: 0;
-  --shadow-offset-y: 1px;
-  --sidebar-primary: oklch(0.637 0.237 25.331);
+  --shadow-offset-y: 4px;
+  --sidebar-primary: var(--accent-amber);
   --muted-foreground: oklch(0.554 0.046 257.417);
   --accent-foreground: oklch(0.985 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary-foreground: oklch(0.985 0 0);
+  --primary-foreground: #1a1a2e;
   --sidebar-foreground: oklch(0.145 0 0);
   --secondary-foreground: oklch(0.269 0 0);
   --destructive-foreground: #FFFFFF;
@@ -52,50 +63,61 @@
 }
 
 .dark {
-  --card: oklch(0.21 0.006 285.885);
-  --ring: oklch(0.637 0.237 25.331);
-  --input: oklch(0.371 0 0);
-  --muted: oklch(0.274 0.006 286.033);
-  --accent: oklch(0.637 0.237 25.331);
-  --border: oklch(0.371 0 0);
-  --radius: 0.5rem;
-  --chart-1: oklch(0.75 0.22 25);
+  /* Midnight Chess Arena Dark Theme */
+  --bg-deep-indigo: #1a1a2e;
+  --bg-graphite: #16213e;
+  --light-square: #d4a574;
+  --dark-square: #2d4a5a;
+  --accent-amber: #f39c12;
+  --accent-electric-blue: #3498db;
+  --danger-red: #e74c3c;
+  --victory-gold: #f1c40f;
+  --victory-emerald: #2ecc71;
+
+  --card: #1e2a3a;
+  --ring: var(--accent-amber);
+  --input: #2d3e50;
+  --muted: #1e2a3a;
+  --accent: var(--accent-amber);
+  --border: #2d4a5a;
+  --radius: 0.75rem;
+  --chart-1: var(--accent-amber);
   --chart-2: oklch(0.78 0.18 60);
   --chart-3: oklch(0.70 0.17 200);
   --chart-4: oklch(0.68 0.19 140);
   --chart-5: oklch(0.72 0.14 280);
-  --popover: oklch(0.269 0 0);
-  --primary: oklch(0.637 0.237 25.331);
-  --sidebar: oklch(0.205 0 0);
+  --popover: var(--bg-graphite);
+  --primary: var(--accent-amber);
+  --sidebar: var(--bg-graphite);
   --spacing: 0.25rem;
   --font-mono: JetBrains Mono, ui-monospace, monospace;
   --font-sans: Inter, ui-sans-serif, sans-serif, system-ui;
-  --secondary: oklch(0.269 0 0);
-  --background: oklch(0.145 0 0);
+  --secondary: #2d3e50;
+  --background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f1624 100%);
   --font-serif: Noto Serif Georgian, ui-serif, serif;
-  --foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --shadow-blur: 4px;
-  --shadow-color: oklch(0 0 0);
-  --sidebar-ring: oklch(0.704 0.191 22.216);
+  --foreground: #ecf0f1;
+  --destructive: var(--danger-red);
+  --shadow-blur: 30px;
+  --shadow-color: rgba(0, 0, 0, 0.7);
+  --sidebar-ring: var(--accent-amber);
   --shadow-spread: 0px;
   --letter-spacing: 0em;
-  --shadow-opacity: 0.1;
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-border: oklch(0.371 0 0);
-  --card-foreground: oklch(0.985 0 0);
+  --shadow-opacity: 0.5;
+  --sidebar-accent: #2d3e50;
+  --sidebar-border: #2d4a5a;
+  --card-foreground: #ecf0f1;
   --shadow-offset-x: 0;
-  --shadow-offset-y: 1px;
-  --sidebar-primary: oklch(0.704 0.191 22.216);
-  --muted-foreground: oklch(0.923 0.003 48.717);
-  --accent-foreground: oklch(0.985 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --destructive-foreground: oklch(0.985 0 0);
-  --sidebar-accent-foreground: oklch(0.922 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --shadow-offset-y: 8px;
+  --sidebar-primary: var(--accent-amber);
+  --muted-foreground: #95a5a6;
+  --accent-foreground: #1a1a2e;
+  --popover-foreground: #ecf0f1;
+  --primary-foreground: #1a1a2e;
+  --sidebar-foreground: #ecf0f1;
+  --secondary-foreground: #ecf0f1;
+  --destructive-foreground: #ffffff;
+  --sidebar-accent-foreground: #ecf0f1;
+  --sidebar-primary-foreground: #1a1a2e;
 }
 
 * {
@@ -107,12 +129,30 @@
 body {
   margin: 0;
   font-family: var(--font-sans);
-  background: var(--background);
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f1624 100%);
   color: var(--foreground);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(circle at 20% 50%, rgba(52, 152, 219, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 50%, rgba(243, 156, 18, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
 }
 
 #root {
   min-height: 100vh;
+  position: relative;
+  z-index: 1;
 }
