@@ -409,16 +409,16 @@
 .game-over-overlay {
   position: fixed;
   inset: 0;
-  background: color-mix(in oklch, var(--background), transparent 10%);
+  background: rgba(0, 0, 0, 0.85);
   backdrop-filter: blur(12px) saturate(150%);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 100;
-  animation: fadeIn 0.4s ease;
+  animation: fadeInDarken 0.6s ease;
 }
 
-@keyframes fadeIn {
+@keyframes fadeInDarken {
   from {
     opacity: 0;
     backdrop-filter: blur(0px) saturate(100%);
@@ -430,42 +430,76 @@
 }
 
 .game-over-card {
-  background: var(--card);
-  border: 1px solid var(--border);
+  background: rgba(30, 42, 58, 0.95);
+  border: 2px solid rgba(243, 156, 18, 0.5);
   border-radius: calc(var(--radius) * 1.5);
   padding: 3.5rem;
   box-shadow:
-    0 20px 60px color-mix(in oklch, var(--shadow-color), transparent 70%),
-    0 8px 24px color-mix(in oklch, var(--shadow-color), transparent 85%),
-    0 0 1px color-mix(in oklch, var(--primary), transparent 90%) inset;
+    0 20px 60px rgba(0, 0, 0, 0.8),
+    0 0 80px rgba(243, 156, 18, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
   text-align: center;
-  animation: slideUp 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  animation: slideUpBounce 0.8s cubic-bezier(0.22, 1, 0.36, 1);
   position: relative;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .game-over-card::before {
-  content: '';
+  content: '♚';
   position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 50% 0%, color-mix(in oklch, var(--primary), transparent 95%) 0%, transparent 70%);
+  font-size: 8rem;
+  top: -4rem;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  animation: kingFall 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  color: var(--accent-amber);
+  filter: drop-shadow(0 0 20px rgba(243, 156, 18, 0.6));
   pointer-events: none;
+}
+
+@keyframes kingFall {
+  0% {
+    top: -10rem;
+    opacity: 0;
+    transform: translateX(-50%) rotate(0deg);
+  }
+  60% {
+    top: -4rem;
+    opacity: 1;
+    transform: translateX(-50%) rotate(15deg);
+  }
+  80% {
+    top: -3.5rem;
+    transform: translateX(-50%) rotate(-10deg);
+  }
+  100% {
+    top: -4rem;
+    opacity: 1;
+    transform: translateX(-50%) rotate(0deg);
+  }
 }
 
 .dark .game-over-card {
   box-shadow:
-    0 20px 60px color-mix(in oklch, var(--shadow-color), transparent 60%),
-    0 8px 24px color-mix(in oklch, var(--shadow-color), transparent 75%),
-    0 0 40px color-mix(in oklch, var(--primary), transparent 92%),
-    0 0 1px color-mix(in oklch, var(--primary), transparent 85%) inset;
+    0 20px 60px rgba(0, 0, 0, 0.9),
+    0 0 100px rgba(243, 156, 18, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
-@keyframes slideUp {
-  from {
+@keyframes slideUpBounce {
+  0% {
     opacity: 0;
-    transform: translateY(30px) scale(0.9);
+    transform: translateY(50px) scale(0.8);
   }
-  to {
+  60% {
+    opacity: 1;
+    transform: translateY(-10px) scale(1.02);
+  }
+  80% {
+    transform: translateY(5px) scale(0.98);
+  }
+  100% {
     opacity: 1;
     transform: translateY(0) scale(1);
   }
@@ -475,15 +509,22 @@
   font-family: var(--font-serif);
   font-size: 2.5rem;
   font-weight: 400;
-  color: var(--foreground);
+  color: var(--accent-amber);
   margin: 0 0 2.5rem 0;
   letter-spacing: 0.05em;
   position: relative;
   z-index: 1;
-  background: linear-gradient(135deg, var(--foreground) 0%, color-mix(in oklch, var(--foreground), var(--primary) 30%) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  text-shadow: 0 0 20px rgba(243, 156, 18, 0.6), 0 0 40px rgba(243, 156, 18, 0.3);
+  animation: titleGlow 2s ease-in-out infinite;
+}
+
+@keyframes titleGlow {
+  0%, 100% {
+    text-shadow: 0 0 20px rgba(243, 156, 18, 0.6), 0 0 40px rgba(243, 156, 18, 0.3);
+  }
+  50% {
+    text-shadow: 0 0 30px rgba(243, 156, 18, 0.8), 0 0 60px rgba(243, 156, 18, 0.5);
+  }
 }
 
 .new-game-btn {
