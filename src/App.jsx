@@ -4,6 +4,8 @@ import Board from './components/Board';
 import Controls from './components/Controls';
 import MoveHistory from './components/MoveHistory';
 import CapturedPieces from './components/CapturedPieces';
+import MaterialBalance from './components/MaterialBalance';
+import ChessClock from './components/ChessClock';
 import ThemeToggle from './components/ThemeToggle';
 import AnimatedBackground from './components/AnimatedBackground';
 import ParticleBackground from './components/ParticleBackground';
@@ -159,11 +161,13 @@ function App() {
 
           <div className="side-panel">
             <div className="turn-indicator">
+              <ChessClock turn={game.turn()} isGameOver={gameOver !== null} />
               <div className={`turn-token ${game.turn() === 'w' ? 'white-turn' : 'black-turn'}`}>
                 <span className="turn-label">Ход: {game.turn() === 'w' ? 'Белые' : 'Чёрные'}</span>
               </div>
             </div>
 
+            <MaterialBalance capturedPieces={capturedPieces} />
             <CapturedPieces captured={capturedPieces} />
             <MoveHistory moves={moveHistory} />
             <Controls
