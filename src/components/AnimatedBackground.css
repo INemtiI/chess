@@ -1,0 +1,144 @@
+/* Turn-based ambient lighting */
+.turn-ambient-light {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  transition: opacity 0.8s ease-in-out;
+}
+
+.white-turn-glow {
+  background: radial-gradient(
+    ellipse 60% 50% at 20% 50%,
+    rgba(243, 156, 18, 0.18) 0%,
+    rgba(232, 139, 62, 0.12) 30%,
+    transparent 60%
+  );
+  animation: ambientPulseWhite 3s ease-in-out infinite;
+}
+
+.black-turn-glow {
+  background: radial-gradient(
+    ellipse 60% 50% at 80% 50%,
+    rgba(107, 159, 216, 0.16) 0%,
+    rgba(78, 125, 178, 0.10) 30%,
+    transparent 60%
+  );
+  animation: ambientPulseBlack 3s ease-in-out infinite;
+}
+
+@keyframes ambientPulseWhite {
+  0%, 100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes ambientPulseBlack {
+  0%, 100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Check flash effect */
+.check-flash {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 40% 35% at 50% 50%,
+    rgba(220, 38, 38, 0.35) 0%,
+    rgba(220, 38, 38, 0.2) 30%,
+    transparent 60%
+  );
+  animation: checkFlashAnimation 0.4s ease-out;
+  z-index: 4;
+  pointer-events: none;
+}
+
+@keyframes checkFlashAnimation {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  30% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.2);
+  }
+}
+
+/* Capture ripple effect */
+.capture-ripple {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(243, 156, 18, 0.25) 0%,
+    rgba(243, 156, 18, 0.15) 20%,
+    rgba(243, 156, 18, 0.08) 40%,
+    transparent 70%
+  );
+  animation: captureRippleAnimation 0.8s ease-out;
+  z-index: 2;
+  pointer-events: none;
+}
+
+@keyframes captureRippleAnimation {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2.5);
+  }
+}
+
+/* Dark mode adjustments */
+.dark .white-turn-glow {
+  background: radial-gradient(
+    ellipse 60% 50% at 20% 50%,
+    rgba(243, 156, 18, 0.22) 0%,
+    rgba(232, 139, 62, 0.15) 30%,
+    transparent 60%
+  );
+}
+
+.dark .black-turn-glow {
+  background: radial-gradient(
+    ellipse 60% 50% at 80% 50%,
+    rgba(107, 159, 216, 0.20) 0%,
+    rgba(78, 125, 178, 0.13) 30%,
+    transparent 60%
+  );
+}
+
+.dark .check-flash {
+  background: radial-gradient(
+    ellipse 40% 35% at 50% 50%,
+    rgba(239, 68, 68, 0.45) 0%,
+    rgba(239, 68, 68, 0.28) 30%,
+    transparent 60%
+  );
+}
+
+.dark .capture-ripple {
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(243, 156, 18, 0.32) 0%,
+    rgba(243, 156, 18, 0.20) 20%,
+    rgba(243, 156, 18, 0.12) 40%,
+    transparent 70%
+  );
+}

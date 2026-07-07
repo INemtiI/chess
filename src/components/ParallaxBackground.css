@@ -1,0 +1,131 @@
+.parallax-container {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.parallax-layer {
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+  transition: transform 0.1s ease-out;
+}
+
+.chess-piece {
+  position: absolute;
+  font-size: 12rem;
+  opacity: 0.03;
+  user-select: none;
+  pointer-events: none;
+  line-height: 1;
+  color: var(--foreground);
+  filter: blur(2px);
+  transition: opacity 0.3s ease, color 0.3s ease;
+}
+
+.dark .chess-piece {
+  opacity: 0.05;
+  filter: blur(1.5px);
+}
+
+/* Subtle glow effect for different pieces */
+.piece-king,
+.piece-queen {
+  font-size: 14rem;
+  opacity: 0.025;
+}
+
+.dark .piece-king,
+.dark .piece-queen {
+  opacity: 0.045;
+  text-shadow: 0 0 40px rgba(243, 156, 18, 0.15);
+}
+
+.piece-rook,
+.piece-bishop {
+  font-size: 11rem;
+  opacity: 0.03;
+}
+
+.dark .piece-rook,
+.dark .piece-bishop {
+  opacity: 0.05;
+}
+
+.piece-knight {
+  font-size: 10rem;
+  opacity: 0.035;
+}
+
+.dark .piece-knight {
+  opacity: 0.055;
+  text-shadow: 0 0 30px rgba(52, 152, 219, 0.12);
+}
+
+.piece-pawn {
+  font-size: 8rem;
+  opacity: 0.04;
+}
+
+.dark .piece-pawn {
+  opacity: 0.06;
+}
+
+/* Prevent layout shift */
+.parallax-layer::before {
+  content: '';
+  position: absolute;
+  inset: -100px;
+}
+
+/* Performance optimization - GPU acceleration */
+.parallax-layer,
+.chess-piece {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .chess-piece {
+    font-size: 8rem;
+  }
+
+  .piece-king,
+  .piece-queen {
+    font-size: 10rem;
+  }
+
+  .piece-rook,
+  .piece-bishop {
+    font-size: 7rem;
+  }
+
+  .piece-knight {
+    font-size: 6.5rem;
+  }
+
+  .piece-pawn {
+    font-size: 5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .chess-piece {
+    font-size: 6rem;
+    opacity: 0.02;
+  }
+
+  .piece-king,
+  .piece-queen {
+    font-size: 7rem;
+  }
+
+  .dark .chess-piece {
+    opacity: 0.03;
+  }
+}

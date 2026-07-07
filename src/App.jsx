@@ -9,7 +9,6 @@ import ChessClock from './components/ChessClock';
 import LastMoveCard from './components/LastMoveCard';
 import ThemeToggle from './components/ThemeToggle';
 import AnimatedBackground from './components/AnimatedBackground';
-import ParticleBackground from './components/ParticleBackground';
 import './App.css';
 
 function App() {
@@ -142,8 +141,12 @@ function App() {
 
   return (
     <div className={`app-container ${moveFlash ? 'move-flash' : ''}`}>
-      <AnimatedBackground />
-      <ParticleBackground />
+      <AnimatedBackground
+        turn={game.turn()}
+        inCheck={game.inCheck()}
+        lastMove={lastMove}
+        capturedPieces={capturedPieces}
+      />
       <ThemeToggle />
 
       <div className="content-wrapper">
