@@ -6,6 +6,7 @@ import MoveHistory from './components/MoveHistory';
 import CapturedPieces from './components/CapturedPieces';
 import MaterialBalance from './components/MaterialBalance';
 import ChessClock from './components/ChessClock';
+import LastMoveCard from './components/LastMoveCard';
 import ThemeToggle from './components/ThemeToggle';
 import AnimatedBackground from './components/AnimatedBackground';
 import ParticleBackground from './components/ParticleBackground';
@@ -22,6 +23,7 @@ function App() {
   const [flipped, setFlipped] = useState(false);
   const [autoFlip, setAutoFlip] = useState(false);
   const [gameOver, setGameOver] = useState(null);
+  const [moveFlash, setMoveFlash] = useState(false);
 
   useEffect(() => {
     const html = document.documentElement;
@@ -38,6 +40,10 @@ function App() {
         setPosition(game.fen());
         setLastMove({ from, to });
         setMoveHistory([...moveHistory, moveData.san]);
+
+        // Световой импульс после хода
+        setMoveFlash(true);
+        setTimeout(() => setMoveFlash(false), 300);
 
         if (moveData.captured) {
           const color = moveData.color === 'w' ? 'white' : 'black';
@@ -135,7 +141,7 @@ function App() {
   };
 
   return (
-    <div className="app-container">
+    <div className={`app-container ${moveFlash ? 'move-flash' : ''}`}>
       <AnimatedBackground />
       <ParticleBackground />
       <ThemeToggle />
@@ -157,6 +163,7 @@ function App() {
               inCheck={game.inCheck()}
               turn={game.turn()}
             />
+            <LastMoveCard lastMove={lastMove} moveHistory={moveHistory} />
           </div>
 
           <div className="side-panel">
