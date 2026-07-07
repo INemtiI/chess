@@ -1,0 +1,72 @@
+.board-container {
+  perspective: 1500px;
+}
+
+.board-wrapper {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) * 1.5);
+  padding: 2rem;
+  box-shadow:
+    0 2px 4px color-mix(in oklch, var(--shadow-color), transparent 94%),
+    0 8px 16px color-mix(in oklch, var(--shadow-color), transparent 92%),
+    0 16px 32px color-mix(in oklch, var(--shadow-color), transparent 90%),
+    0 0 1px inset color-mix(in oklch, var(--foreground), transparent 95%);
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  transform: rotateX(2deg);
+  will-change: transform;
+}
+
+.board-wrapper:hover {
+  transform: rotateX(0deg) translateY(-2px);
+  box-shadow:
+    0 4px 8px color-mix(in oklch, var(--shadow-color), transparent 92%),
+    0 12px 24px color-mix(in oklch, var(--shadow-color), transparent 88%),
+    0 24px 48px color-mix(in oklch, var(--shadow-color), transparent 85%),
+    0 0 1px inset color-mix(in oklch, var(--foreground), transparent 95%);
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(8, 70px);
+  grid-template-rows: repeat(8, 70px);
+  width: 560px;
+  height: 560px;
+  border-radius: calc(var(--radius) * 0.75);
+  overflow: hidden;
+  position: relative;
+  box-shadow:
+    0 0 0 2px var(--border) inset,
+    0 4px 12px inset color-mix(in oklch, var(--shadow-color), transparent 96%);
+}
+
+.dark .board-wrapper {
+  box-shadow:
+    0 2px 4px color-mix(in oklch, var(--shadow-color), transparent 88%),
+    0 8px 16px color-mix(in oklch, var(--shadow-color), transparent 84%),
+    0 16px 32px color-mix(in oklch, var(--shadow-color), transparent 80%),
+    0 0 20px color-mix(in oklch, var(--primary), transparent 96%),
+    0 0 1px inset color-mix(in oklch, var(--primary), transparent 90%);
+}
+
+.dark .board-wrapper:hover {
+  box-shadow:
+    0 4px 8px color-mix(in oklch, var(--shadow-color), transparent 84%),
+    0 12px 24px color-mix(in oklch, var(--shadow-color), transparent 78%),
+    0 24px 48px color-mix(in oklch, var(--shadow-color), transparent 72%),
+    0 0 30px color-mix(in oklch, var(--primary), transparent 94%),
+    0 0 1px inset color-mix(in oklch, var(--primary), transparent 85%);
+}
+
+@media (max-width: 768px) {
+  .board-wrapper {
+    padding: 1rem;
+  }
+
+  .board {
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    width: min(90vw, 500px);
+    height: min(90vw, 500px);
+  }
+}
