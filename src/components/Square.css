@@ -8,29 +8,29 @@
 }
 
 .square.light {
-  background: oklch(0.97 0.005 80);
+  background: var(--light-square);
 }
 
 .square.dark {
-  background: oklch(0.75 0.03 280);
+  background: var(--dark-square);
 }
 
 .dark .square.light {
-  background: oklch(0.28 0.015 270);
+  background: var(--light-square);
 }
 
 .dark .square.dark {
-  background: oklch(0.20 0.02 280);
+  background: var(--dark-square);
 }
 
 .square.selected {
-  box-shadow: 0 0 0 3px var(--ring) inset;
+  box-shadow: 0 0 0 4px var(--accent-amber) inset, 0 0 20px rgba(243, 156, 18, 0.4);
   z-index: 2;
-  background: color-mix(in oklch, var(--accent), transparent 88%) !important;
+  background: color-mix(in oklch, var(--accent-amber), transparent 85%) !important;
 }
 
 .square.last-move {
-  background: color-mix(in oklch, var(--accent), transparent 88%) !important;
+  background: color-mix(in oklch, var(--accent-electric-blue), transparent 85%) !important;
   position: relative;
 }
 
@@ -38,27 +38,28 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, transparent 0%, color-mix(in oklch, var(--primary), transparent 95%) 100%);
+  background: linear-gradient(135deg, transparent 0%, rgba(52, 152, 219, 0.1) 100%);
   pointer-events: none;
 }
 
 .square.king-check {
-  animation: checkPulse 1.2s ease-in-out infinite;
-  background: color-mix(in oklch, var(--destructive), transparent 75%) !important;
+  animation: checkPulse 1s ease-in-out infinite;
+  background: color-mix(in oklch, var(--danger-red), transparent 70%) !important;
 }
 
 @keyframes checkPulse {
   0%, 100% {
-    box-shadow: 0 0 0 0 color-mix(in oklch, var(--destructive), transparent 30%) inset;
+    box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.4) inset;
   }
   50% {
-    box-shadow: 0 0 20px 8px color-mix(in oklch, var(--destructive), transparent 60%) inset;
+    box-shadow: 0 0 20px 8px rgba(231, 76, 60, 0.6) inset;
   }
 }
 
 .square:hover:not(.selected) {
-  background: color-mix(in oklch, var(--accent), transparent 92%) !important;
+  background: color-mix(in oklch, var(--accent-amber), transparent 90%) !important;
   transform: scale(1.02);
+  box-shadow: 0 0 15px rgba(243, 156, 18, 0.2);
 }
 
 .legal-move-indicator {
@@ -82,20 +83,20 @@
 .legal-move-indicator.empty {
   width: 22px;
   height: 22px;
-  background: var(--primary);
+  background: var(--accent-amber);
   border-radius: 50%;
   opacity: 0.7;
-  box-shadow: 0 2px 8px color-mix(in oklch, var(--primary), transparent 60%);
+  box-shadow: 0 2px 8px rgba(243, 156, 18, 0.4), 0 0 12px rgba(243, 156, 18, 0.3);
 }
 
 .legal-move-indicator.capture {
   width: 100%;
   height: 100%;
-  border: 4px solid var(--primary);
+  border: 4px solid var(--accent-amber);
   border-radius: 50%;
   opacity: 0.75;
   box-sizing: border-box;
-  box-shadow: 0 0 12px color-mix(in oklch, var(--primary), transparent 50%) inset;
+  box-shadow: 0 0 12px rgba(243, 156, 18, 0.5) inset, 0 0 20px rgba(243, 156, 18, 0.3);
 }
 
 .coord {
@@ -118,22 +119,24 @@
 }
 
 .piece {
-  font-size: 3.5rem;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
   user-select: none;
   pointer-events: none;
-  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.2));
   transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1);
   will-change: transform, filter;
 }
 
 .square:hover .piece {
   transform: scale(1.08) translateY(-2px);
-  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.3));
 }
 
 .square.selected .piece {
   transform: translateY(-6px) scale(1.1);
-  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.35));
   animation: pieceFloat 2s ease-in-out infinite;
 }
 
@@ -147,63 +150,29 @@
 }
 
 .piece.white-piece {
-  color: #ffffff;
-  text-shadow:
-    0 0 2px #000000,
-    0 1px 3px rgba(0, 0, 0, 0.3),
-    0 2px 6px rgba(0, 0, 0, 0.15),
-    0 0 8px rgba(255, 255, 255, 0.3),
-    0 0 12px rgba(255, 255, 255, 0.2);
+  /* Styles removed - now handled by SVG */
 }
 
 .piece.black-piece {
-  color: #1a1a1a;
-  text-shadow:
-    0 0 2px rgba(255, 255, 255, 0.3),
-    0 1px 3px rgba(0, 0, 0, 0.5),
-    0 0 6px rgba(0, 0, 0, 0.4);
+  /* Styles removed - now handled by SVG */
 }
 
 .dark .piece.white-piece {
-  color: #f5f5f5;
-  text-shadow:
-    0 0 3px #000000,
-    0 1px 4px rgba(0, 0, 0, 0.4),
-    0 2px 8px rgba(0, 0, 0, 0.2),
-    0 0 10px rgba(255, 255, 255, 0.4),
-    0 0 16px rgba(255, 255, 255, 0.25),
-    0 0 20px rgba(200, 200, 255, 0.15);
+  /* Styles removed - now handled by SVG */
 }
 
 .dark .piece.black-piece {
-  color: #0a0a0a;
-  text-shadow:
-    0 0 3px rgba(255, 255, 255, 0.5),
-    0 1px 5px rgba(0, 0, 0, 0.6),
-    0 0 8px rgba(0, 0, 0, 0.5),
-    0 0 12px rgba(100, 100, 120, 0.3);
+  /* Styles removed - now handled by SVG */
 }
 
 .square:hover .piece.white-piece,
 .square.selected .piece.white-piece {
-  text-shadow:
-    0 0 3px #000000,
-    0 2px 4px rgba(0, 0, 0, 0.4),
-    0 4px 10px rgba(0, 0, 0, 0.2),
-    0 0 12px rgba(255, 255, 255, 0.5),
-    0 0 18px rgba(255, 255, 255, 0.3),
-    0 0 24px rgba(255, 255, 255, 0.2);
+  /* Styles removed - now handled by SVG */
 }
 
 .dark .square:hover .piece.white-piece,
 .dark .square.selected .piece.white-piece {
-  text-shadow:
-    0 0 4px #000000,
-    0 2px 6px rgba(0, 0, 0, 0.5),
-    0 4px 12px rgba(0, 0, 0, 0.3),
-    0 0 14px rgba(255, 255, 255, 0.6),
-    0 0 22px rgba(255, 255, 255, 0.4),
-    0 0 30px rgba(200, 200, 255, 0.25);
+  /* Styles removed - now handled by SVG */
 }
 
 @media (max-width: 768px) {
