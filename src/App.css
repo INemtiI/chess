@@ -217,6 +217,12 @@
   gap: 0.75rem;
 }
 
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
 .control-btn {
   padding: 0.875rem 1.5rem;
   border-radius: var(--radius);
@@ -228,6 +234,19 @@
   border: 1px solid var(--border);
   position: relative;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.btn-icon {
+  flex-shrink: 0;
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.control-btn:hover .btn-icon {
+  transform: scale(1.1);
 }
 
 .control-btn::before {
@@ -244,43 +263,83 @@
 }
 
 .control-btn.primary {
-  background: linear-gradient(135deg, var(--primary) 0%, color-mix(in oklch, var(--primary), var(--chart-1) 20%) 100%);
+  background: linear-gradient(135deg, var(--accent-amber) 0%, color-mix(in oklch, var(--accent-amber), var(--chart-1) 20%) 100%);
   color: var(--primary-foreground);
-  border-color: var(--primary);
+  border-color: var(--accent-amber);
   box-shadow:
-    0 4px 12px color-mix(in oklch, var(--primary), transparent 70%),
-    0 0 20px color-mix(in oklch, var(--primary), transparent 90%) inset;
+    0 4px 12px rgba(243, 156, 18, 0.4),
+    0 0 20px rgba(243, 156, 18, 0.2) inset;
+  font-size: 1.05rem;
+  padding: 1rem 1.75rem;
 }
 
 .control-btn.primary:hover {
   transform: translateY(-2px);
   box-shadow:
-    0 6px 20px color-mix(in oklch, var(--primary), transparent 60%),
-    0 0 30px color-mix(in oklch, var(--primary), transparent 85%) inset;
+    0 6px 20px rgba(243, 156, 18, 0.5),
+    0 0 30px rgba(243, 156, 18, 0.3) inset;
 }
 
 .control-btn.primary:active {
   transform: translateY(0) scale(0.98);
   box-shadow:
-    0 2px 8px color-mix(in oklch, var(--primary), transparent 75%),
-    0 0 15px color-mix(in oklch, var(--primary), transparent 92%) inset;
+    0 2px 8px rgba(243, 156, 18, 0.3),
+    0 0 15px rgba(243, 156, 18, 0.15) inset;
 }
 
 .control-btn.secondary {
-  background: var(--secondary);
-  color: var(--secondary-foreground);
-  box-shadow: 0 2px 8px color-mix(in oklch, var(--shadow-color), transparent 94%);
+  background: rgba(30, 42, 58, 0.6);
+  color: var(--foreground);
+  border: 2px solid rgba(243, 156, 18, 0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
 }
 
 .control-btn.secondary:hover:not(:disabled) {
-  background: var(--muted);
+  background: rgba(30, 42, 58, 0.8);
+  border-color: rgba(243, 156, 18, 0.4);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px color-mix(in oklch, var(--shadow-color), transparent 92%);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 .control-btn.secondary:active:not(:disabled) {
   transform: translateY(0) scale(0.98);
-  box-shadow: 0 1px 4px color-mix(in oklch, var(--shadow-color), transparent 96%);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+.control-btn.toggle {
+  background: rgba(30, 42, 58, 0.6);
+  color: var(--foreground);
+  border: 2px solid rgba(243, 156, 18, 0.2);
+  backdrop-filter: blur(10px);
+  justify-content: space-between;
+  padding: 0.875rem 1.25rem;
+}
+
+.control-btn.toggle.active {
+  border-color: var(--accent-amber);
+  background: rgba(243, 156, 18, 0.15);
+  box-shadow: 0 0 15px rgba(243, 156, 18, 0.3);
+}
+
+.toggle-indicator {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  transition: all 0.25s ease;
+}
+
+.toggle-indicator.on {
+  background: var(--accent-amber);
+  color: var(--primary-foreground);
+  box-shadow: 0 0 8px rgba(243, 156, 18, 0.4);
+}
+
+.toggle-indicator.off {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--muted-foreground);
 }
 
 .control-btn:disabled {
