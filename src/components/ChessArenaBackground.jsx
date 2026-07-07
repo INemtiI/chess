@@ -6,6 +6,14 @@ function ChessArenaBackground({ turn, inCheck }) {
   const animationRef = useRef(null);
   const mouseRef = useRef({ x: 0.5, y: 0.5 });
   const currentMouseRef = useRef({ x: 0.5, y: 0.5 });
+  const turnRef = useRef(turn);
+  const inCheckRef = useRef(inCheck);
+
+  // Update refs when props change without restarting animation
+  useEffect(() => {
+    turnRef.current = turn;
+    inCheckRef.current = inCheck;
+  }, [turn, inCheck]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -33,7 +41,7 @@ function ChessArenaBackground({ turn, inCheck }) {
 
       // Create gradient for piece - color based on turn
       const gradient = ctx.createLinearGradient(x, y - size / 2, x, y + size / 2);
-      if (turn === 'w') {
+      if (turnRef.current === 'w') {
         gradient.addColorStop(0, 'rgba(243, 156, 18, 0.15)');
         gradient.addColorStop(0.5, 'rgba(243, 156, 18, 0.08)');
         gradient.addColorStop(1, 'rgba(243, 156, 18, 0.03)');
@@ -107,11 +115,11 @@ function ChessArenaBackground({ turn, inCheck }) {
       );
 
       // Dynamic spotlight based on turn and check
-      if (inCheck) {
+      if (inCheckRef.current) {
         gradient.addColorStop(0, 'rgba(220, 38, 38, 0.12)');
         gradient.addColorStop(0.3, 'rgba(220, 38, 38, 0.06)');
         gradient.addColorStop(0.6, 'rgba(220, 38, 38, 0.02)');
-      } else if (turn === 'w') {
+      } else if (turnRef.current === 'w') {
         gradient.addColorStop(0, 'rgba(243, 156, 18, 0.10)');
         gradient.addColorStop(0.3, 'rgba(243, 156, 18, 0.05)');
         gradient.addColorStop(0.6, 'rgba(232, 139, 62, 0.02)');
@@ -179,7 +187,7 @@ function ChessArenaBackground({ turn, inCheck }) {
         cancelAnimationFrame(animationRef.current);
       }
     };
-  }, [turn, inCheck]);
+  }, []); // Empty deps - animation runs once
 
   return (
     <>
