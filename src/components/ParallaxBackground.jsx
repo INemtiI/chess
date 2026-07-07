@@ -50,23 +50,38 @@ function ParallaxBackground() {
 
   return (
     <div ref={containerRef} className="parallax-container">
+      {/* Background layer - Perspective grid */}
+      <div className="parallax-layer parallax-grid-layer" data-depth="0.15">
+        <div className="perspective-grid"></div>
+      </div>
+
       {/* Layer 1 - Deepest (moves most) */}
-      <div className="parallax-layer" data-depth="0.5">
-        <div className="chess-piece piece-king" style={{ top: '15%', left: '8%' }}>♔</div>
-        <div className="chess-piece piece-queen" style={{ top: '70%', right: '10%' }}>♕</div>
+      <div className="parallax-layer" data-depth="0.6">
+        <div className="chess-piece piece-king" style={{ top: '12%', left: '6%' }}>♔</div>
+        <div className="chess-piece piece-queen" style={{ top: '65%', right: '8%' }}>♕</div>
+        <div className="chess-piece piece-bishop" style={{ top: '80%', left: '15%' }}>♗</div>
       </div>
 
-      {/* Layer 2 - Middle depth */}
-      <div className="parallax-layer" data-depth="0.35">
-        <div className="chess-piece piece-rook" style={{ top: '25%', right: '15%' }}>♖</div>
-        <div className="chess-piece piece-bishop" style={{ bottom: '20%', left: '12%' }}>♗</div>
+      {/* Layer 2 - Deep middle */}
+      <div className="parallax-layer" data-depth="0.45">
+        <div className="chess-piece piece-rook" style={{ top: '22%', right: '12%' }}>♖</div>
+        <div className="chess-piece piece-knight" style={{ bottom: '25%', left: '10%' }}>♘</div>
+        <div className="chess-piece piece-pawn" style={{ top: '55%', right: '25%' }}>♟</div>
       </div>
 
-      {/* Layer 3 - Closest (moves least) */}
-      <div className="parallax-layer" data-depth="0.2">
-        <div className="chess-piece piece-knight" style={{ top: '50%', left: '5%' }}>♘</div>
-        <div className="chess-piece piece-pawn" style={{ top: '35%', right: '8%' }}>♙</div>
-        <div className="chess-piece piece-pawn" style={{ bottom: '15%', right: '20%' }}>♟</div>
+      {/* Layer 3 - Middle */}
+      <div className="parallax-layer" data-depth="0.3">
+        <div className="chess-piece piece-queen" style={{ top: '40%', left: '3%' }}>♕</div>
+        <div className="chess-piece piece-rook" style={{ bottom: '10%', right: '18%' }}>♖</div>
+        <div className="chess-piece piece-pawn" style={{ top: '75%', right: '5%' }}>♙</div>
+      </div>
+
+      {/* Layer 4 - Front (moves least) */}
+      <div className="parallax-layer" data-depth="0.18">
+        <div className="chess-piece piece-knight" style={{ top: '48%', left: '8%' }}>♘</div>
+        <div className="chess-piece piece-bishop" style={{ top: '28%', right: '6%' }}>♗</div>
+        <div className="chess-piece piece-pawn" style={{ bottom: '18%', left: '20%' }}>♟</div>
+        <div className="chess-piece piece-king" style={{ top: '85%', right: '12%' }}>♔</div>
       </div>
     </div>
   );

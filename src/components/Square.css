@@ -124,13 +124,69 @@
   will-change: transform, filter;
 }
 
+.piece-svg {
+  width: 80%;
+  height: 80%;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3)) drop-shadow(0 0 8px rgba(243, 156, 18, 0.15));
+  transition: filter 0.2s ease;
+}
+
+.dark .piece-svg {
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 12px rgba(243, 156, 18, 0.2));
+}
+
 .square:hover .piece {
   transform: scale(1.08) translateY(-2px);
+}
+
+.square:hover .piece-svg {
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4)) drop-shadow(0 0 16px rgba(243, 156, 18, 0.3));
+}
+
+.dark .square:hover .piece-svg {
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.6)) drop-shadow(0 0 20px rgba(243, 156, 18, 0.35));
 }
 
 .square.selected .piece {
   transform: translateY(-6px) scale(1.1);
   animation: pieceFloat 2s ease-in-out infinite;
+}
+
+.square.selected .piece-svg {
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 24px rgba(243, 156, 18, 0.6)) drop-shadow(0 0 36px rgba(243, 156, 18, 0.4));
+}
+
+.dark .square.selected .piece-svg {
+  filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.7)) drop-shadow(0 0 28px rgba(243, 156, 18, 0.7)) drop-shadow(0 0 42px rgba(243, 156, 18, 0.5));
+}
+
+/* Different glow for white and black pieces when selected */
+.square.selected .piece.white-piece .piece-svg {
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.5))
+          drop-shadow(0 0 24px rgba(243, 156, 18, 0.7))
+          drop-shadow(0 0 36px rgba(232, 139, 62, 0.5))
+          drop-shadow(0 0 48px rgba(243, 156, 18, 0.3));
+}
+
+.square.selected .piece.black-piece .piece-svg {
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.5))
+          drop-shadow(0 0 24px rgba(107, 159, 216, 0.7))
+          drop-shadow(0 0 36px rgba(52, 152, 219, 0.5))
+          drop-shadow(0 0 48px rgba(107, 159, 216, 0.3));
+}
+
+.dark .square.selected .piece.white-piece .piece-svg {
+  filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.7))
+          drop-shadow(0 0 28px rgba(243, 156, 18, 0.8))
+          drop-shadow(0 0 42px rgba(232, 139, 62, 0.6))
+          drop-shadow(0 0 56px rgba(243, 156, 18, 0.4));
+}
+
+.dark .square.selected .piece.black-piece .piece-svg {
+  filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.7))
+          drop-shadow(0 0 28px rgba(107, 159, 216, 0.8))
+          drop-shadow(0 0 42px rgba(52, 152, 219, 0.6))
+          drop-shadow(0 0 56px rgba(107, 159, 216, 0.4));
 }
 
 @keyframes pieceFloat {

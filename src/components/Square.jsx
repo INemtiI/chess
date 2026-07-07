@@ -16,7 +16,7 @@ function Square({
       className={`square ${isLight ? 'light' : 'dark'} ${isSelected ? 'selected' : ''} ${isLastMove ? 'last-move' : ''} ${isKingInCheck ? 'king-check' : ''}`}
       onClick={onClick}
     >
-      {piece && <Piece type={piece.type} color={piece.color} />}
+      {piece && <Piece type={piece.type} color={piece.color} isSelected={isSelected} />}
       {isLegalMove && (
         <div className={`legal-move-indicator ${piece ? 'capture' : 'empty'}`}></div>
       )}

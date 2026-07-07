@@ -4,7 +4,7 @@
   inset: 0;
   pointer-events: none;
   z-index: 1;
-  transition: opacity 1s ease-in-out;
+  transition: opacity 1.8s ease-in-out, transform 1.8s ease-in-out;
 }
 
 .white-turn-glow {
@@ -15,7 +15,7 @@
     rgba(243, 156, 18, 0.08) 45%,
     transparent 70%
   );
-  animation: ambientPulseWhite 4s ease-in-out infinite;
+  animation: ambientPulseWhite 5s ease-in-out infinite;
 }
 
 .black-turn-glow {
@@ -26,28 +26,28 @@
     rgba(107, 159, 216, 0.08) 45%,
     transparent 70%
   );
-  animation: ambientPulseBlack 4s ease-in-out infinite;
+  animation: ambientPulseBlack 5s ease-in-out infinite;
 }
 
 @keyframes ambientPulseWhite {
   0%, 100% {
-    opacity: 0.8;
+    opacity: 0.75;
     transform: scale(1) translateX(0);
   }
   50% {
-    opacity: 1;
-    transform: scale(1.05) translateX(10px);
+    opacity: 0.95;
+    transform: scale(1.03) translateX(8px);
   }
 }
 
 @keyframes ambientPulseBlack {
   0%, 100% {
-    opacity: 0.8;
+    opacity: 0.75;
     transform: scale(1) translateX(0);
   }
   50% {
-    opacity: 1;
-    transform: scale(1.05) translateX(-10px);
+    opacity: 0.95;
+    transform: scale(1.03) translateX(-8px);
   }
 }
 
